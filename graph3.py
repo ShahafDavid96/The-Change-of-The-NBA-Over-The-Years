@@ -5,6 +5,7 @@ from plotly.subplots import make_subplots
 
 from plotly.subplots import make_subplots
 
+
 def get_fig(pos_selected=None):
     # Read the datasets
     if pos_selected is None:
@@ -25,8 +26,8 @@ def get_fig(pos_selected=None):
     # Filter the data for the specified decade
     trace_locations = [(1, 1), (1, 2), (2, 1), (2, 2), (3, 1), (3, 2), (3, 2)]
 
-    fig_list=[]
-    i=0
+    fig_list = []
+    i = 0
     for year in years.keys():
         merged_df = df[(df['Year'] >= years[year][0]) & (df['Year'] <= years[year][1])]
         # Create a scatter plot
@@ -36,27 +37,28 @@ def get_fig(pos_selected=None):
         if ("Centers" in pos_selected):
             # Add scatter trace for Centers
             centers_data = merged_df[merged_df['Pos'] == 'C']
+
             fig.add_trace(go.Scatter(
                 x=centers_data['height'],
                 y=centers_data['weight'],
                 mode='markers',
                 name='Centers',
-                marker=dict(color='blue'),legendgroup='c'
+                marker=dict(color='blue'), legendgroup=f"{i}",
+                text=centers_data['Player']
             ))
-            if i != 0:
-                fig.update_traces(showlegend=False)
+
         if ("PowerForwards" in pos_selected):
             # Add scatter trace for Centers
             centers_data = merged_df[merged_df['Pos'] == 'PF']
+
             fig.add_trace(go.Scatter(
                 x=centers_data['height'],
                 y=centers_data['weight'],
                 mode='markers',
                 name='PowerForwards',
-                marker=dict(color='red'),legendgroup='pf'
+                marker=dict(color='red'), legendgroup=f"{i}",
+                text=centers_data['Player']
             ))
-            if i != 0:
-                fig.update_traces(showlegend=False)
 
         if ("SmallForwards" in pos_selected):
             # Add scatter trace for Centers
@@ -66,7 +68,8 @@ def get_fig(pos_selected=None):
                 y=centers_data['weight'],
                 mode='markers',
                 name='SmallForwards',
-                marker=dict(color='green'),legendgroup='sf'
+                marker=dict(color='green'), legendgroup=f"{i}",
+                text=centers_data['Player']
             ))
         if ("ShootingGuards" in pos_selected):
             # Add scatter trace for Centers
@@ -76,11 +79,11 @@ def get_fig(pos_selected=None):
                 y=centers_data['weight'],
                 mode='markers',
                 name='ShootingGuards',
-                marker=dict(color='purple'),
-                legendgroup='sg'
+                marker=dict(color='purple'), legendgroup=f"{i}",
+                text=centers_data['Player']
+
             ))
-            if i != 0:
-                fig.update_traces(showlegend=False)
+
         if ("PointGuards" in pos_selected):
             # Add scatter trace for Centers
             centers_data = merged_df[merged_df['Pos'] == 'PG']
@@ -89,17 +92,17 @@ def get_fig(pos_selected=None):
                 y=centers_data['weight'],
                 mode='markers',
                 name='PointGuards',
-                marker=dict(color='orange'),
-                legendgroup='pg'
+                marker=dict(color='orange'), legendgroup=f"{i}",
+                text=centers_data['Player']
+
             ))
-            if i != 0:
-                fig.update_traces(showlegend=False)
 
         fig.update_layout(
             title=f'Players Height vs Weight for  ({year})',
             xaxis_title='Height (cm)',
             yaxis_title='Weight (kg)',
-            showlegend=True,
+            showlegend=False,
+
             legend=dict(
                 x=1,
                 y=1.0,
@@ -110,11 +113,12 @@ def get_fig(pos_selected=None):
         )
 
         fig_list.append(fig)
+        i += 1
     # Create a list of your 7 Plotly Go figures
     figures = fig_list[1:]
 
     # Create a new plot with subplots
-    fig = make_subplots(rows=2, cols=3,subplot_titles=list(years.keys())[1:])
+    fig = make_subplots(rows=2, cols=3, subplot_titles=list(years.keys())[1:])
 
     # Iterate over the figures and add them to the subplots
     for i, fig_trace in enumerate(figures):
@@ -126,7 +130,7 @@ def get_fig(pos_selected=None):
                 title=f'Players Height vs Weight for  ({year})',
                 xaxis_title='Height (cm)',
                 yaxis_title='Weight (kg)',
-                showlegend=True,
+
                 legend=dict(
                     x=1,
                     y=1.0,
@@ -142,6 +146,9 @@ def get_fig(pos_selected=None):
         for j in range(4):
             fig.update_xaxes(title_text="Highet", row=i, col=j)
             fig.update_yaxes(title_text="Weight", row=i, col=j)
+    names = set()
+    fig.for_each_trace(lambda trace1: trace1.update(showlegend=False) if (trace1.name in names) else names.add(trace1.name))
     return fig
 
-get_fig()
+
+get_fig().show()
