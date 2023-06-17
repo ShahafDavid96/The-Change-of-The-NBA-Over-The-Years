@@ -1,12 +1,8 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import plotly
-import plotly.offline as pyo
 import plotly.graph_objs as go
-import plotly.io as pio
-# Function to create 'xGame' column, to calculate the average for stats per game
-# x == DataFrame ; y == Column
+
+
 
 def pergame(x, y):
     x[y + 'xG'] = round(x[y]/x['G'], 2)
@@ -143,6 +139,7 @@ def get_fig3p(data=None):
     selected_data.append(p3gen)
     fig_3p = go.Figure(data=selected_data, layout=layout_3p)
 
+
     return fig_3p
 
 def get_fig2p(data=None):
@@ -164,6 +161,5 @@ def get_fig2p(data=None):
             selected_data.append(p2pg)
     selected_data.append(p2gen)
     fig_2p = go.Figure(data=selected_data, layout=layout_2p)
-
 
     return fig_2p
