@@ -152,5 +152,6 @@ def get_fig(pos_selected=None):
 
     fig.for_each_trace(lambda trace1: trace1.update(showlegend=False) if (trace1.name in names) else names.add(trace1.name))
     fig.update_yaxes(range=[50, 150])
+    fig.update_xaxes(range=[150, 240])
 
     return fig

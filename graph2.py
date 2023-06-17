@@ -132,7 +132,7 @@ def get_fig(Tm, ps):
     options=[team_dict[x] for x in options]
 
     filtered_df = df[df['Tm'].isin(options)]
-    #filtered_df['Tm'] =team_dict[Tm]
+
     filtered_df.loc[:, 'Tm'] =team_dict[Tm]
     filtered_df=filtered_df.fillna(0)
     # Group the DataFrame by 'Year'
@@ -165,7 +165,7 @@ def get_fig(Tm, ps):
         tickfont=dict(size=14, color='#000000')
     ),
     yaxis=dict(
-        title='Values',
+        title='Mean of The Feature',
         titlefont=dict(size=16, color='#000000'),
         tickfont=dict(size=14, color='#000000'),
         showgrid=True, gridwidth=0.2, gridcolor='#D7DBDD'
