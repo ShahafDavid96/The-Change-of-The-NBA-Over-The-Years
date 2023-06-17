@@ -115,7 +115,7 @@ def get_fig(pos_selected=None):
 
         fig_list.append(fig)
         i += 1
-    # Create a list of your 7 Plotly Go figures
+    # Create a list of your 6 Plotly Go figures
     figures = fig_list[1:]
 
     # Create a new plot with subplots

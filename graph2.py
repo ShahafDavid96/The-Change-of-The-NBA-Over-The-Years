@@ -3,7 +3,9 @@ import pandas as pd
 
 # Read the dataset
 df = pd.read_csv('Seasons_Stats.csv')
-df= df.loc[df['Year'] > 1979]
+df = df.loc[df['Year'] > 1979]
+
+# NBA teams dictionary
 nba_teams = {
     'Atlanta Hawks': ['Tri-Cities Blackhawks', 'Milwaukee Hawks', 'St. Louis Hawks'],
     'Boston Celtics': [],
@@ -34,9 +36,10 @@ nba_teams = {
     'San Antonio Spurs': [],
     'Toronto Raptors': [],
     'Utah Jazz': ['New Orleans Jazz'],
-    'Washington Wizards': ['Washington Bullets', 'Capital Bullets', 'Baltimore Bullets', 'Chicago Zephyrs',
-                           'Chicago Packers']
+    'Washington Wizards': ['Washington Bullets', 'Capital Bullets', 'Baltimore Bullets', 'Chicago Zephyrs', 'Chicago Packers']
 }
+
+# Color mapping for features
 all_colors = {
     "ORB": "#e41a1c",   # Red
     "FT": "#377eb8",    # Blue
@@ -46,6 +49,7 @@ all_colors = {
     "DRB": "#b3b3cc"    # Yellow
 }
 
+# Name mapping for features
 names = {
     "ORB": "Offensive Rebound",
     "FT": "Free Throw",
@@ -54,9 +58,12 @@ names = {
     "BLK": "Blocks",
     "DRB": "Defensive Rebounds"
 }
-def get_fig(Tm, ps):
-    feature=[]
 
+def get_fig(Tm, ps):
+    # Empty list to store feature plots
+    feature_plots = []
+
+    # Dictionary mapping long team names to abbreviations
     team_dict = {
         'Fort Wayne Pistons': 'FTW',
         'Indianapolis Olympians': 'INO',
@@ -127,62 +134,63 @@ def get_fig(Tm, ps):
         'New Orleans Pelicans': 'NOP',
         'Charlotte Hornets': 'CHO'
     }
-    options=[Tm]+nba_teams[Tm]
 
-    options=[team_dict[x] for x in options]
+    options = [Tm] + nba_teams[Tm]
+    options = [team_dict[x] for x in options]
 
+    # Filter the DataFrame based on selected teams
     filtered_df = df[df['Tm'].isin(options)]
 
-    filtered_df.loc[:, 'Tm'] =team_dict[Tm]
-    filtered_df=filtered_df.fillna(0)
+    # Map the selected team to its abbreviation
+    filtered_df.loc[:, 'Tm'] = team_dict[Tm]
+
+    # Fill any NaN values in the DataFrame with 0
+    filtered_df = filtered_df.fillna(0)
+
     # Group the DataFrame by 'Year'
     grouped = filtered_df.groupby('Year')
 
-    # Create the plot
-    feature_plots=[]
-
-        # Determine the features based on the option
+    # Determine the features based on the option
     if ps == "Offensive":
-            features = [ "ORB", "FT", "AST"]
+        features = ["ORB", "FT", "AST"]
     else:
-            features = ["STL", "BLK", "DRB"]
+        features = ["STL", "BLK", "DRB"]
 
-        # Iterate over the features
+    # Iterate over the features
     for feature in features:
-            # Get the data for the current feature
-            data = grouped[feature].mean()
+        # Get the data for the current feature
+        data = grouped[feature].mean()
 
-            # Create a scatter plot for the feature
-            feature_plots.append(go.Scatter(x=data.index, y=data.values, name=names[feature],marker=dict(color=all_colors[feature])))
+        # Create a scatter plot for the feature
+        feature_plots.append(go.Scatter(x=data.index, y=data.values, name=names[feature], marker=dict(color=all_colors[feature])))
 
+    # Set the layout for the plot
+    layout = go.Layout(
+        title=f'Stats for {ps} Play Style for {Tm}',
+        xaxis=dict(
+            title='Years',
+            titlefont=dict(size=16, color='#000000'),
+            tickfont=dict(size=14, color='#000000')
+        ),
+        yaxis=dict(
+            title='Mean of Stats',
+            titlefont=dict(size=16, color='#000000'),
+            tickfont=dict(size=14, color='#000000'),
+            showgrid=True, gridwidth=0.2, gridcolor='#D7DBDD'
+        ),
+        legend=dict(
+            x=1,
+            y=1.0,
+            bgcolor='white',
+            bordercolor='black'
+        ),
+        plot_bgcolor='white',
+        barmode='group',
+        bargap=0.15,
+        bargroupgap=0.1
+    )
 
-    # Set the layout
-    layout=go.Layout(
-    title=f'Stats for {ps} Play Style for {Tm}',
-    xaxis=dict(
-        title='Years',
-        titlefont=dict(size=16, color='#000000'),
-        tickfont=dict(size=14, color='#000000')
-    ),
-    yaxis=dict(
-        title='Mean of Stats',
-        titlefont=dict(size=16, color='#000000'),
-        tickfont=dict(size=14, color='#000000'),
-        showgrid=True, gridwidth=0.2, gridcolor='#D7DBDD'
-    ),
-    legend=dict(
-        x=1,
-        y=1.0,
-        bgcolor='white',
-        bordercolor='black'
-    ),
-    plot_bgcolor='white',
-    barmode='group',
-    bargap=0.15,
-    bargroupgap=0.1
-)
+    # Create the figure
     fig = go.Figure(data=feature_plots, layout=layout)
 
-    # Show the plot
     return fig
-
