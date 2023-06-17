@@ -165,7 +165,7 @@ def get_fig(Tm, ps):
         tickfont=dict(size=14, color='#000000')
     ),
     yaxis=dict(
-        title='Mean of The Stats',
+        title='Mean of Stats',
         titlefont=dict(size=16, color='#000000'),
         tickfont=dict(size=14, color='#000000'),
         showgrid=True, gridwidth=0.2, gridcolor='#D7DBDD'
