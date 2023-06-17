@@ -12,7 +12,7 @@ nba_teams = {
     'Chicago Bulls': [],
     'Cleveland Cavaliers': [],
     'Dallas Mavericks': [],
-    'Denver Nuggets': ['Denver Rockets'],
+    'Denver Nuggets': [],
     'Detroit Pistons': [],
     'Golden State Warriors': ['San Francisco Warriors', 'Philadelphia Warriors'],
     'Houston Rockets': ['San Diego Rockets'],
@@ -62,7 +62,7 @@ def get_fig(Tm, ps):
         'Indianapolis Olympians': 'INO',
         'Chicago Stags': 'CHS',
         'Toronto Huskies': 'TOT',
-        'Denver Nuggets': 'DNN',
+        'Denver Nuggets': 'DEN',
         'New York Knicks': 'NYK',
         'Tri-Cities Blackhawks': 'TRI',
         'Anderson Packers': 'AND',
@@ -128,9 +128,12 @@ def get_fig(Tm, ps):
         'Charlotte Hornets': 'CHO'
     }
     options=[Tm]+nba_teams[Tm]
+
     options=[team_dict[x] for x in options]
+
     filtered_df = df[df['Tm'].isin(options)]
-    filtered_df['Tm'] =team_dict[Tm]
+    #filtered_df['Tm'] =team_dict[Tm]
+    filtered_df.loc[:, 'Tm'] =team_dict[Tm]
     filtered_df=filtered_df.fillna(0)
     # Group the DataFrame by 'Year'
     grouped = filtered_df.groupby('Year')
@@ -182,3 +185,4 @@ def get_fig(Tm, ps):
 
     # Show the plot
     return fig
+

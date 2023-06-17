@@ -109,7 +109,8 @@ def get_fig(pos_selected=None):
                 bgcolor='white',
                 bordercolor='black'
             ),
-            plot_bgcolor='white'
+            plot_bgcolor='white',
+
         )
 
         fig_list.append(fig)
@@ -141,14 +142,15 @@ def get_fig(pos_selected=None):
             )
 
     # Update the layout of the subplots
-    fig.update_layout(height=600, width=1000, title_text="Highet VS weight ")
+
+    fig.update_layout(height=600, width=1000, title_text="Height VS weight ")
     for i in range(3):
         for j in range(4):
-            fig.update_xaxes(title_text="Highet", row=i, col=j)
+            fig.update_xaxes(title_text="Height", row=i, col=j)
             fig.update_yaxes(title_text="Weight", row=i, col=j)
     names = set()
+
     fig.for_each_trace(lambda trace1: trace1.update(showlegend=False) if (trace1.name in names) else names.add(trace1.name))
+    fig.update_yaxes(range=[50, 150])
+
     return fig
-
-
-get_fig().show()
