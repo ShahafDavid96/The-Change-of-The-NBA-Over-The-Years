@@ -1,11 +1,8 @@
 import plotly.graph_objects as go
-import plotly.subplots as sp
 import pandas as pd
-import streamlit as st
 
 # Read the dataset
 df = pd.read_csv('Seasons_Stats.csv')
-import plotly.express as px
 df= df.loc[df['Year'] > 1979]
 nba_teams = {
     'Atlanta Hawks': ['Tri-Cities Blackhawks', 'Milwaukee Hawks', 'St. Louis Hawks'],

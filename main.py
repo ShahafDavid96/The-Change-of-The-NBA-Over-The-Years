@@ -1,5 +1,4 @@
 import streamlit as st
-import plotly.express as px
 import pandas as pd
 import graph1
 import graph2
@@ -9,17 +8,11 @@ from PIL import Image
 
 from plotly.subplots import make_subplots
 st.set_page_config(layout="wide")
-# Generate example data
-df3 = px.data.tips()
-df4 = px.data.gapminder().query("year == 2007")
-df5 = pd.DataFrame({'fruits': ['Apple', 'Orange', 'Banana'], 'counts': [20, 14, 35]})
+
 
 # Create the graphs
 graph1_fig = graph1.get_fig3p()
 graph1_2_fig = graph1.get_fig2p()
-graph3_fig = px.scatter(df3, x='total_bill', y='tip', color='sex')
-graph4_fig = px.scatter(df4, x='gdpPercap', y='lifeExp', size='pop', color='continent', log_x=True)
-graph5_fig = px.pie(df5, values='counts', names='fruits')
 
 # Set up the app layout
 st.title("The Change of The NBA Over The Years")
