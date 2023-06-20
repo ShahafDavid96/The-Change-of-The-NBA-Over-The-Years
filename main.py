@@ -47,11 +47,7 @@ elif graph1_radio == '3 Point Attempt':
     selected_graph1 = graph1.get_fig3p(pos_selection)
 else:
     selected_graph1 = graph1.get_fig3p(pos_selection)
-st.write("---")
-
-
-st.write("The goal of these graphs is to provide an overview of the average number of two-point and three-point attempts per game over the years, categorized by different player positions in basketball.")
-st.write("By analyzing these graphs, individuals can gain insights into the evolving playing styles and shooting preferences of different positions throughout the years.")
+st.write("These graphs aim to present a clear picture of the average number of two-point and three-point attempts per game over a span of years, classified by player positions in basketball. By examining these graphs, individuals can gain valuable insights into the changing trends and shooting tendencies of different positions as time progresses. The data showcased in the graphs shed light on how playing styles have evolved, revealing shifts in emphasis between two-point and three-point shooting among various positions. By understanding these patterns, analysts and enthusiasts can develop a deeper understanding of the game's strategic evolution and the impact of positional roles on scoring strategies.")
 # Display the selected graph
 st.plotly_chart(selected_graph1, use_container_width=True)
 st.write("---")
@@ -62,8 +58,7 @@ st.write("The faceting graph allows for a comprehensive analysis of the relation
 graph3_fig = graph3.get_fig(pos_selection)
 st.plotly_chart(graph3_fig, use_container_width=True)
 
-# Team selection
-col1, col2, col3 = st.columns(3)
+
 team_names = [
     'Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls',
     'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons',
@@ -76,6 +71,8 @@ team_names = [
 ]
 st.write("---")
 st.write("These graphs allow you to compare two teams based on their offensive and defensive performance in various aspects of the game. The offensive features include offensive rebounds (ORB), free throws made (FT), and assists (AST). These metrics reflect a team's ability to secure second-chance opportunities, convert free throws, and facilitate scoring through passing. On the other hand, the defensive features consist of steals (STL), blocks (BLK), and defensive rebounds (DRB). These metrics measure a team's ability to disrupt opponents' possessions, protect the rim, and secure defensive rebounds. By analyzing these features, you can gain insights into the strengths and weaknesses of teams' offensive and defensive playstyles.")
+# Team selection
+col1, col2, col3 = st.columns(3)
 with col1:
     # Allow user to select Team1
     team1_select = st.selectbox("Select Team1", team_names, index=0)
