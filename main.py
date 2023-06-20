@@ -51,6 +51,7 @@ st.write("The goal of these graphs is to provide an overview of the average numb
 st.plotly_chart(selected_graph1, use_container_width=True)
 
 # Display graph3
+st.write("The faceting graph allows for a comprehensive analysis of the relationship between height and weight across different decades for various player positions in basketball. By utilizing this visualization, one can observe how the average height and weight of players have evolved over time for different positions. The graph provides separate panels for each decade, allowing for easy comparison and identification of trends. It enables users to examine the distribution and variations in height and weight within each position, highlighting potential changes in player physique and position requirements.")
 graph3_fig = graph3.get_fig(pos_selection)
 st.plotly_chart(graph3_fig, use_container_width=True)
 
@@ -66,7 +67,7 @@ team_names = [
     'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors',
     'Utah Jazz', 'Washington Wizards'
 ]
-
+st.write("These graphs allow you to compare two teams based on their offensive and defensive performance in various aspects of the game. The offensive features include offensive rebounds (ORB), free throws made (FT), and assists (AST). These metrics reflect a team's ability to secure second-chance opportunities, convert free throws, and facilitate scoring through passing. On the other hand, the defensive features consist of steals (STL), blocks (BLK), and defensive rebounds (DRB). These metrics measure a team's ability to disrupt opponents' possessions, protect the rim, and secure defensive rebounds. By analyzing these features, you can gain insights into the strengths and weaknesses of teams' offensive and defensive playstyles.")
 with col1:
     # Allow user to select Team1
     team1_select = st.selectbox("Select Team1", team_names, index=0)
