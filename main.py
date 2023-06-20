@@ -50,7 +50,8 @@ else:
 st.write("---")
 
 
-st.write("The goal of these graphs is to provide an overview of the average number of two-point and three-point attempts per game over the years, categorized by different player positions in basketball. By analyzing these graphs, individuals can gain insights into the evolving playing styles and shooting preferences of different positions throughout the years.")
+st.write("The goal of these graphs is to provide an overview of the average number of two-point and three-point attempts per game over the years, categorized by different player positions in basketball.")
+st.write("By analyzing these graphs, individuals can gain insights into the evolving playing styles and shooting preferences of different positions throughout the years.")
 # Display the selected graph
 st.plotly_chart(selected_graph1, use_container_width=True)
 st.write("---")
@@ -73,6 +74,7 @@ team_names = [
     'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors',
     'Utah Jazz', 'Washington Wizards'
 ]
+st.write("---")
 st.write("These graphs allow you to compare two teams based on their offensive and defensive performance in various aspects of the game. The offensive features include offensive rebounds (ORB), free throws made (FT), and assists (AST). These metrics reflect a team's ability to secure second-chance opportunities, convert free throws, and facilitate scoring through passing. On the other hand, the defensive features consist of steals (STL), blocks (BLK), and defensive rebounds (DRB). These metrics measure a team's ability to disrupt opponents' possessions, protect the rim, and secure defensive rebounds. By analyzing these features, you can gain insights into the strengths and weaknesses of teams' offensive and defensive playstyles.")
 with col1:
     # Allow user to select Team1
