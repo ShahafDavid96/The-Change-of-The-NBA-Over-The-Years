@@ -17,6 +17,8 @@ graph1_2_fig = graph1.get_fig2p()
 st.title("The Change of The NBA Over The Years")
 st.write("Welcome to our NBA Dashboard—an all-inclusive platform designed to meticulously analyze and dissect the dynamic evolution of the NBA throughout the years. With a multitude of comprehensive tools and visualizations at your fingertips, our purpose is to provide an in-depth exploration of the changes that have shaped the landscape of professional basketball. Delve into captivating statistics, unravel trends, empowering you to gain unparalleled insights into the rich history and ever-evolving nature of the NBA.")
 # Player position and graph type selection
+st.write("---")
+
 pos, radio = st.columns(2)
 
 with pos:
@@ -45,10 +47,14 @@ elif graph1_radio == '3 Point Attempt':
     selected_graph1 = graph1.get_fig3p(pos_selection)
 else:
     selected_graph1 = graph1.get_fig3p(pos_selection)
+st.write("---")
+
 
 st.write("The goal of these graphs is to provide an overview of the average number of two-point and three-point attempts per game over the years, categorized by different player positions in basketball. By analyzing these graphs, individuals can gain insights into the evolving playing styles and shooting preferences of different positions throughout the years.")
 # Display the selected graph
 st.plotly_chart(selected_graph1, use_container_width=True)
+st.write("---")
+
 
 # Display graph3
 st.write("The faceting graph allows for a comprehensive analysis of the relationship between height and weight across different decades for various player positions in basketball. By utilizing this visualization, one can observe how the average height and weight of players have evolved over time for different positions. The graph provides separate panels for each decade, allowing for easy comparison and identification of trends. It enables users to examine the distribution and variations in height and weight within each position, highlighting potential changes in player physique and position requirements.")
