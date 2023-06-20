@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 
 # Set up Streamlit page configuration
 st.set_page_config(layout="wide")
-
+st.write("Welcome to our NBA Dashboard—an all-inclusive platform designed to meticulously analyze and dissect the dynamic evolution of the NBA throughout the years. With a multitude of comprehensive tools and visualizations at your fingertips, our purpose is to provide an in-depth exploration of the changes that have shaped the landscape of professional basketball. Delve into captivating statistics, unravel trends, empowering you to gain unparalleled insights into the rich history and ever-evolving nature of the NBA.")
 # Create the graphs
 graph1_fig = graph1.get_fig3p()
 graph1_2_fig = graph1.get_fig2p()
