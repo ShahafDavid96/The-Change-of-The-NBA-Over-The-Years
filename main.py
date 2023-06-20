@@ -46,6 +46,7 @@ elif graph1_radio == '3 Point Attempt':
 else:
     selected_graph1 = graph1.get_fig3p(pos_selection)
 
+st.write("The goal of these graphs is to provide an overview of the average number of two-point and three-point attempts per game over the years, categorized by different player positions in basketball. By analyzing these graphs, individuals can gain insights into the evolving playing styles and shooting preferences of different positions throughout the years.")
 # Display the selected graph
 st.plotly_chart(selected_graph1, use_container_width=True)
 
